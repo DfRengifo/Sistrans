@@ -9,15 +9,12 @@ import java.util.ArrayList;
 import vos.Cliente;
 
 public class DAOTablaCliente {
-
 	
 	public final static String USUARIO = "ISIS2304A241810";
 	/**
-	 * Arraylits de recursos que se usan para la ejecución de sentencias SQL
+	 * Arraylist de recursos que se usan para la ejecución de sentencias SQL
 	 */
-	private ArrayList<Object> recursos;
-
-	
+	private ArrayList<Object> recursos;	
 	/**
 	 * Atributo que genera la conexión a la base de datos
 	 */
@@ -162,18 +159,14 @@ System.out.println(sql);
 		prepStmt.executeQuery();
 	}
 	
-	public Cliente convertResultSetToCliente(ResultSet resultSet) throws SQLException {
-		
+	public Cliente convertResultSetToCliente(ResultSet resultSet) throws SQLException {		
 		
 		String contrasena = resultSet.getString("CONTRASENA");
 		Long idUsuario = resultSet.getLong("IDUSUARIO");
 		String usuario = resultSet.getString("USUARIO");
-		String nombre = resultSet.getString("NOMBRE");
-	
+		String nombre = resultSet.getString("NOMBRE");	
 	
 		Cliente cliente = new Cliente(usuario, contrasena, idUsuario, nombre);
 		return cliente;
-	}
-	
-	
+	}	
 }

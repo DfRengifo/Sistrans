@@ -166,12 +166,7 @@ public class DAOTablaHabitacion {
 	
 		Habitacion hab = new Habitacion(ubicacion, descripcion, precio, idHabitacion, tamano, idOperador);
 		return hab;
-	}
-	
-	
-	
-	
-	
+	}	
 }
 
 

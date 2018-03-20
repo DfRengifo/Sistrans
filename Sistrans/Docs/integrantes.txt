@@ -1,5 +1,5 @@
-David Andrés Ramírez 201532981
-Luis Carlos Garavito 201614451
+Daniel Rengifo 201533922
+Sanitago Rangel 201632011
 
-da.ramirezv@uniandes.edu.co
-lc.garavito@uniandes.edu.co
+s.rangel@uniandes.edu.co
+df.rengifo@uniandes.edu.co

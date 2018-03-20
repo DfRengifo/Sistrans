@@ -14,21 +14,29 @@ public class Vivienda {
 	private String menaje;
 	
 	@JsonProperty(value="numeroHabitaciones")
-	private Long numeroHabitaciones;
+	private Integer numeroHabitaciones;
 	
 	@JsonProperty(value="idPersonaNatural")
 	private Long idPersonaNatural;
+        
+        @JsonProperty(value="idVivienda")
+	private Long idVivienda;
 	
 	@JsonProperty(value="precio")
-	private Long precio;
+	private Double precio;
+        
+        @JsonProperty(value="tamano")
+	private Double tamano;
 
 	public Vivienda(@JsonProperty(value="descripcion")
 	 String descripcion, @JsonProperty(value="ubicacion")
 	 String ubicacion, @JsonProperty(value="menaje")
 	 String menaje, @JsonProperty(value="numeroHabitaciones")
-	 Long numeroHabitaciones, @JsonProperty(value="idPersonaNatural")
+	 Integer numeroHabitaciones, @JsonProperty(value="idPersonaNatural")
 	 Long idPersonaNatural, @JsonProperty(value="precio")
-	 Long precio)
+	 Double precio, @JsonProperty(value="tamano")
+	 Double tamano, @JsonProperty(value="idVivienda")
+	 Long idVivienda)
 	{
 		this.descripcion = descripcion;
 		this.ubicacion= ubicacion;
@@ -36,6 +44,8 @@ public class Vivienda {
 		this.numeroHabitaciones = numeroHabitaciones;
 		this.idPersonaNatural = idPersonaNatural;
 		this.precio = precio;
+                this.tamano = tamano;
+                this.idVivienda = idVivienda;
 	}
 	
 	public String getDescripcion() {
@@ -62,11 +72,11 @@ public class Vivienda {
 		this.menaje = menaje;
 	}
 
-	public Long getNumeroHabitaciones() {
+	public Integer getNumeroHabitaciones() {
 		return numeroHabitaciones;
 	}
 
-	public void setNumeroHabitaciones(Long numeroHabitaciones) {
+	public void setNumeroHabitaciones(Integer numeroHabitaciones) {
 		this.numeroHabitaciones = numeroHabitaciones;
 	}
 
@@ -78,14 +88,27 @@ public class Vivienda {
 		this.idPersonaNatural = idPersonaNatural;
 	}
 
-	public Long getPrecio() {
+	public Double getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(Long precio) {
+	public void setPrecio(Double precio) {
 		this.precio = precio;
 	}
-	
-	
-	
+        
+	public Double getTamano() {
+		return tamano;
+	}
+
+	public void setTamano(Double tamano) {
+		this.tamano = tamano;
+	}
+        
+	public Long getIdVivienda() {
+		return idVivienda;
+	}
+
+	public void setIdVivienda(Long idVivienda) {
+		this.idVivienda = idVivienda;
+	}	
 }
