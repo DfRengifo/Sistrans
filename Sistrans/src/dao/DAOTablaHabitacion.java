@@ -93,7 +93,7 @@ public class DAOTablaHabitacion {
 	
 	
 	
-	public ArrayList<Habitacion> getHabitaciones() throws SQLException, Exception {
+	public ArrayList<Habitacion> getHabitaciones() throws SQLException {
 		ArrayList<Habitacion> habitaciones = new ArrayList<Habitacion>();
 
 		//Aclaracion: Por simplicidad, solamente se obtienen los primeros 50 resultados de la consulta
