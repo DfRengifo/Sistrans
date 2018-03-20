@@ -13,7 +13,10 @@ public class Usuario {
 	@JsonProperty(value="idUsuario")
 	private Long idUsuario;	
 	
-	public Usuario(@JsonProperty(value="usuario") String usuario, @JsonProperty(value="contrasena")String contrasena,@JsonProperty(value="idUsuario") Long idUsuario) {
+	public Usuario(@JsonProperty(value="usuario") String usuario, 
+                @JsonProperty(value="contrasena")String contrasena,
+                @JsonProperty(value="idUsuario") Long idUsuario) 
+        {
 		super();
 		this.usuario = usuario;
 		this.contrasena = contrasena;
