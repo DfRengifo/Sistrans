@@ -30,7 +30,7 @@ public class HabitacionesService {
 		return context.getRealPath("WEB-INF/ConnectionData");
 	}
 	
-	
+	adads
 	
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
