@@ -70,12 +70,23 @@ public class DAOTablaViviendaUniveristaria {
 				viviendaUniversitaria.getNombre(),
 				viviendaUniversitaria.getHoraAtencion(),
 				viviendaUniversitaria.getDescripcion());
+		String sql1= String.format("INSERT INTO %1$s.OPERADOR (CONTRASENA,"
+				+ " IDUSUARIO, USARIO) VALUES (%2$s, '%3$s', '%4$s')", 
+				USUARIO, 
+				viviendaUniversitaria.getContrasena(),
+				viviendaUniversitaria.getIdUsuario(),
+				viviendaUniversitaria.getUsuario()
+				);
+	
 	
 		if (findViviendaUniversitariaById(viviendaUniversitaria.getIdUsuario())!=null && findViviendaUniversitariaByUsuario(viviendaUniversitaria.getUsuario() )!= null) {
 			throw new Exception("Ya existe la viviendaUniversitaria");
 		}
 		else {
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
+			PreparedStatement prepStmt1 = conn.prepareStatement(sql1);
+
+			recursos.add(prepStmt1);
 			recursos.add(prepStmt);
 			prepStmt.executeQuery();
 		}

@@ -71,12 +71,23 @@ public class DAOTablaPersonaNatural {
 				personaNatural.getUsuario(),
 				personaNatural.getNombre(),
 				personaNatural.getUniandino());
+		String sql1= String.format("INSERT INTO %1$s.OPERADOR (CONTRASENA,"
+				+ " IDUSUARIO, USARIO) VALUES (%2$s, '%3$s', '%4$s')", 
+				USUARIO, 
+				personaNatural.getContrasena(),
+				personaNatural.getIdUsuario(),
+				personaNatural.getUsuario()
+				);
+	
 	
 		if (findPersonaNaturalById(personaNatural.getIdUsuario())!=null && findPersonaNaturalByUsuario(personaNatural.getUsuario() )!= null) {
 			throw new Exception("Ya existe la personaNatural");
 		}
 		else {
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
+			PreparedStatement prepStmt1 = conn.prepareStatement(sql1);
+
+			recursos.add(prepStmt1);
 			recursos.add(prepStmt);
 			prepStmt.executeQuery();
 		}

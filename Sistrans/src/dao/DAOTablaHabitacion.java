@@ -10,8 +10,7 @@ import vos.Habitacion;
 
 /**
  * Clase DAO que se conecta la base de datos usando JDBC para resolver los requerimientos de la aplicación
- * @author Grupo A - 10
- */
+ * @author Grupo A - 16*/
 public class DAOTablaHabitacion {
 
 	

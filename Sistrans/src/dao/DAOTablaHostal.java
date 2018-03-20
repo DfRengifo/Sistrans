@@ -64,7 +64,7 @@ public class DAOTablaHostal {
 			throw new Exception("hay campos nulos");
 		}
 		
-		String sql = String.format("INSERT INTO %1$s.Hostal (CONTRASENA,"
+		String sql = String.format("INSERT INTO %1$s.HOSTAL (CONTRASENA,"
 				+ " IDUSUARIO, USARIO, NOMBRE, UBICACION, DESCRIPCION,HORAATENCION) VALUES (%2$s, '%3$s', '%4$s','%5$s','%6$s','%7$s','%8$s')", 
 				USUARIO, 
 				hostal.getContrasena(),
@@ -74,13 +74,23 @@ public class DAOTablaHostal {
 				hostal.getUbicacion(),
 				hostal.getDescripcion(),
 				hostal.getHoraAtencion());
-	
+		String sql1= String.format("INSERT INTO %1$s.OPERADOR (CONTRASENA,"
+				+ " IDUSUARIO, USARIO) VALUES (%2$s, '%3$s', '%4$s')", 
+				USUARIO, 
+				hostal.getContrasena(),
+				hostal.getIdUsuario(),
+				hostal.getUsuario()
+				);
 		if (findHostalById(hostal.getIdUsuario())!=null && findHostalByUsuario(hostal.getUsuario() )!= null) {
 			throw new Exception("Ya existe el hostal");
 		}
 		else {
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
+			PreparedStatement prepStmt1 = conn.prepareStatement(sql1);
+
+			recursos.add(prepStmt1);
 			recursos.add(prepStmt);
+
 			prepStmt.executeQuery();
 		}
 		

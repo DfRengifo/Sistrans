@@ -70,13 +70,24 @@ public class DAOTablaHotel {
 				hotel.getNombre(),
 				hotel.getUbicacion(),
 				hotel.getDescripcion());
+		String sql1= String.format("INSERT INTO %1$s.OPERADOR (CONTRASENA,"
+				+ " IDUSUARIO, USARIO) VALUES (%2$s, '%3$s', '%4$s')", 
+				USUARIO, 
+				hotel.getContrasena(),
+				hotel.getIdUsuario(),
+				hotel.getUsuario()
+				);
 	
 		if (findHotelById(hotel.getIdUsuario())!=null && findHotelByUsuario(hotel.getUsuario() )!= null) {
 			throw new Exception("Ya existe el hotel");
 		}
 		else {
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
+			PreparedStatement prepStmt1 = conn.prepareStatement(sql1);
+
+			recursos.add(prepStmt1);
 			recursos.add(prepStmt);
+			
 			prepStmt.executeQuery();
 		}
 		
