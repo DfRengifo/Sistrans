@@ -3,9 +3,14 @@ package tm;
 import java.io.File;
 import java.io.FileInputStream;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
 
+import dao.DAOTablaHabitacion;
 import vos.Cliente;
+import vos.Habitacion;
 
 public class AlohaTM {
 	 
@@ -52,6 +57,11 @@ public class AlohaTM {
 		connectionDataPath = contextPathP + CONNECTION_DATA_FILE_NAME_REMOTE;
 		initConnectionData();
 	}
+	private Connection darConexion() throws SQLException {
+		System.out.println("[PARRANDEROS APP] Attempting Connection to: " + url + " - By User: " + user);
+		return DriverManager.getConnection(url, user, password);
+	}
+
 	
 	private void initConnectionData() {
 		try {
@@ -68,5 +78,42 @@ public class AlohaTM {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public List<Habitacion> getAllHabitaciones() throws Exception {
+		DAOTablaHabitacion daoHabitacion = new DAOTablaHabitacion();
+		List<Habitacion> habitaciones;
+		try 
+		{
+			this.conn = darConexion();
+			daoHabitacion.setConn(conn);
+			
+			//Por simplicidad, solamente se obtienen los primeros 50 resultados de la consulta
+			habitaciones = daoHabitacion.getHabitaciones();
+		}
+		catch (SQLException sqlException) {
+			System.err.println("[EXCEPTION] SQLException:" + sqlException.getMessage());
+			sqlException.printStackTrace();
+			throw sqlException;
+		} 
+		catch (Exception exception) {
+			System.err.println("[EXCEPTION] General Exception:" + exception.getMessage());
+			exception.printStackTrace();
+			throw exception;
+		} 
+		finally {
+			try {
+				daoHabitacion.cerrarRecursos();
+				if(this.conn!=null){
+					this.conn.close();					
+				}
+			}
+			catch (SQLException exception) {
+				System.err.println("[EXCEPTION] SQLException While Closing Resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return habitaciones;
 	}
 }

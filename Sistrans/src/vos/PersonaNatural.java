@@ -14,9 +14,9 @@ public class PersonaNatural extends Operador {
 	
 	
 	public PersonaNatural(@JsonProperty(value="usuario") String usuario,
-			@JsonProperty(value="contrasena")String contrasena,@JsonProperty(value="id") Long id,@JsonProperty(value="nombre")String nombre,
+			@JsonProperty(value="contrasena")String contrasena,@JsonProperty(value="idUsuario") Long idUsuario,@JsonProperty(value="nombre")String nombre,
 			@JsonProperty(value="uniandino") Long uniandino) {
-		super(usuario, contrasena, id);
+		super(usuario, contrasena, idUsuario);
 		this.nombre = nombre;
 		this.uniandino = uniandino;
 	}

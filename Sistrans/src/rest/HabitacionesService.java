@@ -11,9 +11,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import tm.AlohaTM;
+import vos.Habitacion;
 
 
-@Path("bebedores")
+@Path("habitaciones")
 public class HabitacionesService {
 
 	
@@ -29,8 +30,7 @@ public class HabitacionesService {
 	private String getPath() {
 		return context.getRealPath("WEB-INF/ConnectionData");
 	}
-	
-	adads
+
 	
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
@@ -41,8 +41,8 @@ public class HabitacionesService {
 			
 			List<Habitacion> habitaciones;
 			//Por simplicidad, solamente se obtienen los primeros 50 resultados de la consulta
-			habitaciones = tm.getAllBebedores();
-			return Response.status(200).entity(bebedores).build();
+			habitaciones = tm.getAllHabitaciones();
+			return Response.status(200).entity(habitaciones).build();
 		} 
 		catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();

@@ -65,7 +65,8 @@ public class DAOTablaHabitacion {
 	 * @throws SQLException - Cualquier error que arroje la base de datos. No se pudo agregar el ingrediente.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public void registrarHabitacion(Habitacion habitacion) throws SQLException, Exception {
+	public void registrarHabitacion(Habitacion habitacion) throws SQLException, Exception
+	{
 
 		if(habitacion.getDescripcion() == null || habitacion.getIdHabitacion() == null || habitacion.getIdOperador() == null || 
 				habitacion.getPrecio() == null || habitacion.getTamano()== null || habitacion.getUbicacion()== null )
@@ -78,14 +79,22 @@ public class DAOTablaHabitacion {
 				habitacion.getDescripcion(), 
 				habitacion.getIdHabitacion(),
 				habitacion.getIdOperador(), 
-				habitacion.getPrecio());
-				habitacion.getTamano();
-				habitacion.getUbicacion();
-System.out.println(sql);
+				habitacion.getPrecio(),
+				habitacion.getTamano(),
+				habitacion.getUbicacion());
+		System.out.println(sql);
 
-PreparedStatement prepStmt = conn.prepareStatement(sql);
-recursos.add(prepStmt);
-prepStmt.executeQuery();
+		if (findHabitacionById(habitacion.getIdHabitacion())!= null) {
+	
+			throw new Exception("ya existe la habitacion en oferta");
+
+			}
+		else {
+			PreparedStatement prepStmt = conn.prepareStatement(sql);
+			recursos.add(prepStmt);
+			prepStmt.executeQuery();
+			}
+
 	}
 	
 	

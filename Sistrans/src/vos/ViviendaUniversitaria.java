@@ -14,11 +14,11 @@ public class ViviendaUniversitaria extends Operador {
 	private String descripcion;
 
 	public ViviendaUniversitaria(@JsonProperty(value="usuario") String usuario,
-			@JsonProperty(value="contrasena")String contrasena,@JsonProperty(value="id") Long id
+			@JsonProperty(value="contrasena")String contrasena,@JsonProperty(value="idUsuario") Long idUsuario
 			,@JsonProperty(value="horaAtencion")String horaAtencion,@JsonProperty(value="nombre") String nombre,
 			 @JsonProperty(value="descripcion")String descripcion)
 	{
-		super(usuario, contrasena, id);
+		super(usuario, contrasena, idUsuario);
 		this.descripcion = descripcion;
 		this.horaAtencion = horaAtencion;
 		this.nombre =nombre;
