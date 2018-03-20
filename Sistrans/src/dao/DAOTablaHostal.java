@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import vos.Usuario;
+import vos.Hostal;
 
-public class DAOTablaUsuario {
+public class DAOTablaHostal {
 
 	
 	public final static String USUARIO = "ISIS2304A241810";
@@ -27,7 +27,7 @@ public class DAOTablaUsuario {
 	 * Metodo constructor que crea DAOIngrediente
 	 * <b>post: </b> Crea la instancia del DAO e inicializa el Arraylist de recursos
 	 */
-	public DAOTablaUsuario() {
+	public DAOTablaHostal() {
 		recursos = new ArrayList<Object>();
 	}
 
@@ -55,22 +55,28 @@ public class DAOTablaUsuario {
 	}
 
 
-	public void registrarUsuario(Usuario usuario) throws SQLException, Exception {
+	public void registrarHostal(Hostal hostal) throws SQLException, Exception {
 
-		if( usuario.getContrasena()== null || usuario.getIdUsuario() == null || usuario.getUsuario()== null)
+		if( hostal.getContrasena()== null || hostal.getIdUsuario() == null || hostal.getUsuario()== null
+				|| hostal.getNombre()== null|| hostal.getDescripcion()== null
+				|| hostal.getNombre()== null|| hostal.getUbicacion()== null|| hostal.getHoraAtencion()== null)
 		{
 			throw new Exception("hay campos nulos");
 		}
 		
-		String sql = String.format("INSERT INTO %1$s.USUARIO (CONTRASENA,"
-				+ " IDUSUARIO, USARIO) VALUES (%2$s, '%3$s', '%4$s')", 
+		String sql = String.format("INSERT INTO %1$s.Hostal (CONTRASENA,"
+				+ " IDUSUARIO, USARIO, NOMBRE, UBICACION, DESCRIPCION,HORAATENCION) VALUES (%2$s, '%3$s', '%4$s','%5$s','%6$s','%7$s','%8$s')", 
 				USUARIO, 
-				usuario.getContrasena(),
-				usuario.getIdUsuario(),
-				usuario.getUsuario());
+				hostal.getContrasena(),
+				hostal.getIdUsuario(),
+				hostal.getUsuario(),
+				hostal.getNombre(),
+				hostal.getUbicacion(),
+				hostal.getDescripcion(),
+				hostal.getHoraAtencion());
 	
-		if (findUsuarioById(usuario.getIdUsuario())!=null && findUsuarioByUsuario(usuario.getUsuario() )!= null) {
-			throw new Exception("Ya existe el usuario");
+		if (findHostalById(hostal.getIdUsuario())!=null && findHostalByUsuario(hostal.getUsuario() )!= null) {
+			throw new Exception("Ya existe el hostal");
 		}
 		else {
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -85,57 +91,57 @@ System.out.println(sql);
 	
 	
 	
-	public ArrayList<Usuario> getUsuarios() throws SQLException, Exception {
-		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+	public ArrayList<Hostal> getHostales() throws SQLException, Exception {
+		ArrayList<Hostal> hostales = new ArrayList<Hostal>();
 
 		//Aclaracion: Por simplicidad, solamente se obtienen los primeros 50 resultados de la consulta
-		String sql = String.format("SELECT * FROM %1$s.USUARIO WHERE ROWNUM <= 50", USUARIO);
+		String sql = String.format("SELECT * FROM %1$s.HOSTAL WHERE ROWNUM <= 50", USUARIO);
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-			usuarios.add(convertResultSetToUsuario(rs));
+			hostales.add(convertResultSetToHostal(rs));
 		}
-		return usuarios;
+		return hostales;
 	}
 	
 	
-	public Usuario findUsuarioById(Long id) throws SQLException, Exception 
+	public Hostal findHostalById(Long id) throws SQLException, Exception 
 	{
-		Usuario usu = null;
+		Hostal usu = null;
 
-		String sql = String.format("SELECT * FROM %1$s.USUARIO WHERE IDUSUARIO = %2$d", USUARIO, id); 
+		String sql = String.format("SELECT * FROM %1$s.HOSTAL WHERE IDHOSTAL = %2$d", USUARIO, id); 
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
 		if(rs.next()) {
-			usu = convertResultSetToUsuario(rs);
+			usu = convertResultSetToHostal(rs);
 		}
 
 		return usu;
 	}	
 	
-	public Usuario findUsuarioByUsuario(String pusuario) throws SQLException, Exception 
+	public Hostal findHostalByUsuario(String pusuario) throws SQLException, Exception 
 	{
-		Usuario usu = null;
+		Hostal usu = null;
 
-		String sql = String.format("SELECT * FROM %1$s.USUARIO WHERE USUARIO = %2$d", USUARIO, pusuario); 
+		String sql = String.format("SELECT * FROM %1$s.HOSTAL WHERE USARIO = %2$d", USUARIO, pusuario); 
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
 		if(rs.next()) {
-			usu = convertResultSetToUsuario(rs);
+			usu = convertResultSetToHostal(rs);
 		}
 
 		return usu;
 	}	
-//	public void updateUsuario(Usuario usuario) throws SQLException, Exception {
+//	public void updateHostal(Usuario usuario) throws SQLException, Exception {
 //
 //		StringBuilder sql = new StringBuilder();
 //		sql.append(String.format("UPDATE %s.HABITACION SET ", USUARIO));
@@ -150,9 +156,9 @@ System.out.println(sql);
 //		prepStmt.executeQuery();
 //	}
 
-	public void deleteUsuario(Usuario usuario) throws SQLException, Exception {
+	public void deleteHostal(Hostal hostal) throws SQLException, Exception {
 
-		String sql = String.format("DELETE FROM %1$s.USUARIO WHERE IDUSUARIO = %2$d", USUARIO, usuario.getIdUsuario());
+		String sql = String.format("DELETE FROM %1$s.HOSTAL WHERE IDHOSTAL = %2$d", USUARIO, hostal.getIdUsuario());
 
 		System.out.println(sql);
 		
@@ -161,19 +167,20 @@ System.out.println(sql);
 		prepStmt.executeQuery();
 	}
 	
-	public Usuario convertResultSetToUsuario(ResultSet resultSet) throws SQLException {
+	public Hostal convertResultSetToHostal(ResultSet resultSet) throws SQLException {
 		
 		
 		String contrasena = resultSet.getString("CONTRASENA");
 		Long idUsuario = resultSet.getLong("IDUSUARIO");
 		String usuario = resultSet.getString("USUARIO");
-		
+		String nombre = resultSet.getString("NOMBRE");
+		String ubicacion = resultSet.getString("UBICACION");
+		String descripcion = resultSet.getString("DESCRIPCION");
+		String horaAtencion = resultSet.getString("HORAATENCION");
+
 	
-	
-		Usuario usu = new Usuario(usuario, contrasena, idUsuario);
-		return usu;
+		Hostal hostal = new Hostal(usuario, contrasena, idUsuario, horaAtencion, nombre, ubicacion, descripcion);
+		return hostal;
 	}
-	
-	
 	
 }

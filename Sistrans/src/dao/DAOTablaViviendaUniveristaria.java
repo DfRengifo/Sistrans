@@ -6,11 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import vos.Usuario;
+import vos.ViviendaUniversitaria;
 
-public class DAOTablaUsuario {
-
-	
+public class DAOTablaViviendaUniveristaria {
 	public final static String USUARIO = "ISIS2304A241810";
 	/**
 	 * Arraylits de recursos que se usan para la ejecución de sentencias SQL
@@ -27,7 +25,7 @@ public class DAOTablaUsuario {
 	 * Metodo constructor que crea DAOIngrediente
 	 * <b>post: </b> Crea la instancia del DAO e inicializa el Arraylist de recursos
 	 */
-	public DAOTablaUsuario() {
+	public DAOTablaViviendaUniveristaria() {
 		recursos = new ArrayList<Object>();
 	}
 
@@ -55,22 +53,26 @@ public class DAOTablaUsuario {
 	}
 
 
-	public void registrarUsuario(Usuario usuario) throws SQLException, Exception {
+	public void registrarViviendaUniversitaria(ViviendaUniversitaria viviendaUniversitaria) throws SQLException, Exception {
 
-		if( usuario.getContrasena()== null || usuario.getIdUsuario() == null || usuario.getUsuario()== null)
+		if( viviendaUniversitaria.getContrasena()== null || viviendaUniversitaria.getIdUsuario() == null || viviendaUniversitaria.getUsuario()== null|| viviendaUniversitaria.getNombre()== null|| viviendaUniversitaria.getDescripcion()== null
+				|| viviendaUniversitaria.getNombre()== null|| viviendaUniversitaria.getHoraAtencion()== null)
 		{
 			throw new Exception("hay campos nulos");
 		}
 		
-		String sql = String.format("INSERT INTO %1$s.USUARIO (CONTRASENA,"
-				+ " IDUSUARIO, USARIO) VALUES (%2$s, '%3$s', '%4$s')", 
+		String sql = String.format("INSERT INTO %1$s.HOTEL (CONTRASENA,"
+				+ " IDUSUARIO, USARIO, NOMBRE, HORAATENCION, DESCRIPCION) VALUES (%2$s, '%3$s', '%4$s','%5$s','%6$s','%7$s')", 
 				USUARIO, 
-				usuario.getContrasena(),
-				usuario.getIdUsuario(),
-				usuario.getUsuario());
+				viviendaUniversitaria.getContrasena(),
+				viviendaUniversitaria.getIdUsuario(),
+				viviendaUniversitaria.getUsuario(),
+				viviendaUniversitaria.getNombre(),
+				viviendaUniversitaria.getHoraAtencion(),
+				viviendaUniversitaria.getDescripcion());
 	
-		if (findUsuarioById(usuario.getIdUsuario())!=null && findUsuarioByUsuario(usuario.getUsuario() )!= null) {
-			throw new Exception("Ya existe el usuario");
+		if (findViviendaUniversitariaById(viviendaUniversitaria.getIdUsuario())!=null && findViviendaUniversitariaByUsuario(viviendaUniversitaria.getUsuario() )!= null) {
+			throw new Exception("Ya existe la viviendaUniversitaria");
 		}
 		else {
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -85,57 +87,57 @@ System.out.println(sql);
 	
 	
 	
-	public ArrayList<Usuario> getUsuarios() throws SQLException, Exception {
-		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+	public ArrayList<ViviendaUniversitaria> getViviendaUniversitarias() throws SQLException, Exception {
+		ArrayList<ViviendaUniversitaria> usuarios = new ArrayList<ViviendaUniversitaria>();
 
 		//Aclaracion: Por simplicidad, solamente se obtienen los primeros 50 resultados de la consulta
-		String sql = String.format("SELECT * FROM %1$s.USUARIO WHERE ROWNUM <= 50", USUARIO);
+		String sql = String.format("SELECT * FROM %1$s.VIVIENDAUNIVERSITARIA WHERE ROWNUM <= 50", USUARIO);
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-			usuarios.add(convertResultSetToUsuario(rs));
+			usuarios.add(convertResultSetToViviendaUniversitaria(rs));
 		}
 		return usuarios;
 	}
 	
 	
-	public Usuario findUsuarioById(Long id) throws SQLException, Exception 
+	public ViviendaUniversitaria findViviendaUniversitariaById(Long id) throws SQLException, Exception 
 	{
-		Usuario usu = null;
+		ViviendaUniversitaria usu = null;
 
-		String sql = String.format("SELECT * FROM %1$s.USUARIO WHERE IDUSUARIO = %2$d", USUARIO, id); 
+		String sql = String.format("SELECT * FROM %1$s.VIVIENDAUNIVERSITARIA WHERE IDVIVIENDAUNIVERSITARIA = %2$d", USUARIO, id); 
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
 		if(rs.next()) {
-			usu = convertResultSetToUsuario(rs);
+			usu = convertResultSetToViviendaUniversitaria(rs);
 		}
 
 		return usu;
 	}	
 	
-	public Usuario findUsuarioByUsuario(String pusuario) throws SQLException, Exception 
+	public ViviendaUniversitaria findViviendaUniversitariaByUsuario(String pusuario) throws SQLException, Exception 
 	{
-		Usuario usu = null;
+		ViviendaUniversitaria usu = null;
 
-		String sql = String.format("SELECT * FROM %1$s.USUARIO WHERE USUARIO = %2$d", USUARIO, pusuario); 
+		String sql = String.format("SELECT * FROM %1$s.VIVIENDAUNIVERSITARIA WHERE USARIO = %2$d", USUARIO, pusuario); 
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
 		if(rs.next()) {
-			usu = convertResultSetToUsuario(rs);
+			usu = convertResultSetToViviendaUniversitaria(rs);
 		}
 
 		return usu;
 	}	
-//	public void updateUsuario(Usuario usuario) throws SQLException, Exception {
+//	public void updateViviendaUniversitaria(Usuario usuario) throws SQLException, Exception {
 //
 //		StringBuilder sql = new StringBuilder();
 //		sql.append(String.format("UPDATE %s.HABITACION SET ", USUARIO));
@@ -150,9 +152,9 @@ System.out.println(sql);
 //		prepStmt.executeQuery();
 //	}
 
-	public void deleteUsuario(Usuario usuario) throws SQLException, Exception {
+	public void deleteViviendaUniversitaria(ViviendaUniversitaria viviendaUniversitaria) throws SQLException, Exception {
 
-		String sql = String.format("DELETE FROM %1$s.USUARIO WHERE IDUSUARIO = %2$d", USUARIO, usuario.getIdUsuario());
+		String sql = String.format("DELETE FROM %1$s.VIVIENDAUNIVERSITARIA WHERE IDVIVIENDAUNIVERSITARIA = %2$d", USUARIO, viviendaUniversitaria.getIdUsuario());
 
 		System.out.println(sql);
 		
@@ -161,19 +163,20 @@ System.out.println(sql);
 		prepStmt.executeQuery();
 	}
 	
-	public Usuario convertResultSetToUsuario(ResultSet resultSet) throws SQLException {
+	public ViviendaUniversitaria convertResultSetToViviendaUniversitaria(ResultSet resultSet) throws SQLException {
 		
 		
 		String contrasena = resultSet.getString("CONTRASENA");
 		Long idUsuario = resultSet.getLong("IDUSUARIO");
 		String usuario = resultSet.getString("USUARIO");
-		
+		String nombre = resultSet.getString("NOMBRE");
+		String horaAtencion = resultSet.getString("HORAATENCION");
+		String descripcion = resultSet.getString("DESCRIPCION");
+
 	
-	
-		Usuario usu = new Usuario(usuario, contrasena, idUsuario);
-		return usu;
+		ViviendaUniversitaria viviendaUniversitaria = new ViviendaUniversitaria(usuario, contrasena, idUsuario, nombre, horaAtencion, descripcion);
+		return viviendaUniversitaria;
 	}
 	
-	
-	
+
 }

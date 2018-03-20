@@ -16,7 +16,7 @@ public class Hotel extends Operador{
 
 	public Hotel(@JsonProperty(value="usuario") String usuario,
 			@JsonProperty(value="contrasena")String contrasena,@JsonProperty(value="id") Long id
-			,@JsonProperty(value="horaAtencion")String horaAtencion,@JsonProperty(value="nombre") String nombre,
+			,@JsonProperty(value="nombre") String nombre,
 			@JsonProperty(value="ubicacion")String ubicacion, @JsonProperty(value="descripcion")String descripcion)
 	{
 		super(usuario, contrasena, id);

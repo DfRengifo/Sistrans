@@ -27,7 +27,7 @@ public class DAOTablaCliente {
 	 * Metodo constructor que crea DAOIngrediente
 	 * <b>post: </b> Crea la instancia del DAO e inicializa el Arraylist de recursos
 	 */
-	public DAOTablaUsuario() {
+	public DAOTablaCliente() {
 		recursos = new ArrayList<Object>();
 	}
 
@@ -54,13 +54,7 @@ public class DAOTablaCliente {
 		this.conn = con;
 	}
 
-	/**
-	 * Método que agrega el ingrediente que entra como parámetro a la base de datos.
-	 * @param ingrediente - el ingrediente a agregar. ingrediente != null
-	 * <b> post:</b> Se ha agregado el ingrediente a la base de datos.
-	 * @throws SQLException - Cualquier error que arroje la base de datos. No se pudo agregar el ingrediente.
-	 * @throws Exception - Cualquier error que no corresponda a la base de datos
-	 */
+
 	public void registrarCliente(Cliente cliente) throws SQLException, Exception {
 
 		if( cliente.getContrasena()== null || cliente.getIdUsuario() == null || cliente.getUsuario()== null|| cliente.getNombre()== null)
@@ -77,7 +71,7 @@ public class DAOTablaCliente {
 				cliente.getNombre());
 	
 		if (findClienteById(cliente.getIdUsuario())!=null && findClienteByUsuario(cliente.getUsuario() )!= null) {
-			throw new Exception("Ya existe el usuario");
+			throw new Exception("Ya existe el cliente");
 		}
 		else {
 			PreparedStatement prepStmt = conn.prepareStatement(sql);

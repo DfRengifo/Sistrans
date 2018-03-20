@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import vos.Usuario;
+import vos.PersonaNatural;
 
-public class DAOTablaUsuario {
+public class DAOTablaPersonaNatural {
 
 	
 	public final static String USUARIO = "ISIS2304A241810";
@@ -27,7 +27,7 @@ public class DAOTablaUsuario {
 	 * Metodo constructor que crea DAOIngrediente
 	 * <b>post: </b> Crea la instancia del DAO e inicializa el Arraylist de recursos
 	 */
-	public DAOTablaUsuario() {
+	public DAOTablaPersonaNatural() {
 		recursos = new ArrayList<Object>();
 	}
 
@@ -55,22 +55,25 @@ public class DAOTablaUsuario {
 	}
 
 
-	public void registrarUsuario(Usuario usuario) throws SQLException, Exception {
+	public void registrarPersonaNatural(PersonaNatural personaNatural) throws SQLException, Exception {
 
-		if( usuario.getContrasena()== null || usuario.getIdUsuario() == null || usuario.getUsuario()== null)
+		if( personaNatural.getContrasena()== null || personaNatural.getIdUsuario() == null || personaNatural.getUsuario()== null
+				|| personaNatural.getNombre()== null|| personaNatural.getUniandino() == null)
 		{
 			throw new Exception("hay campos nulos");
 		}
 		
 		String sql = String.format("INSERT INTO %1$s.USUARIO (CONTRASENA,"
-				+ " IDUSUARIO, USARIO) VALUES (%2$s, '%3$s', '%4$s')", 
+				+ " IDUSUARIO, USARIO, NOMBRE, UNIANDINO) VALUES (%2$s, '%3$s', '%4$s',%5$s', '%6$s')", 
 				USUARIO, 
-				usuario.getContrasena(),
-				usuario.getIdUsuario(),
-				usuario.getUsuario());
+				personaNatural.getContrasena(),
+				personaNatural.getIdUsuario(),
+				personaNatural.getUsuario(),
+				personaNatural.getNombre(),
+				personaNatural.getUniandino());
 	
-		if (findUsuarioById(usuario.getIdUsuario())!=null && findUsuarioByUsuario(usuario.getUsuario() )!= null) {
-			throw new Exception("Ya existe el usuario");
+		if (findPersonaNaturalById(personaNatural.getIdUsuario())!=null && findPersonaNaturalByUsuario(personaNatural.getUsuario() )!= null) {
+			throw new Exception("Ya existe la personaNatural");
 		}
 		else {
 			PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -85,57 +88,57 @@ System.out.println(sql);
 	
 	
 	
-	public ArrayList<Usuario> getUsuarios() throws SQLException, Exception {
-		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+	public ArrayList<PersonaNatural> getPersonaNaturals() throws SQLException, Exception {
+		ArrayList<PersonaNatural> personaNaturals = new ArrayList<PersonaNatural>();
 
 		//Aclaracion: Por simplicidad, solamente se obtienen los primeros 50 resultados de la consulta
-		String sql = String.format("SELECT * FROM %1$s.USUARIO WHERE ROWNUM <= 50", USUARIO);
+		String sql = String.format("SELECT * FROM %1$s.PERSONANATURAL WHERE ROWNUM <= 50", USUARIO);
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-			usuarios.add(convertResultSetToUsuario(rs));
+			personaNaturals.add(convertResultSetToPersonaNatural(rs));
 		}
-		return usuarios;
+		return personaNaturals;
 	}
 	
 	
-	public Usuario findUsuarioById(Long id) throws SQLException, Exception 
+	public PersonaNatural findPersonaNaturalById(Long id) throws SQLException, Exception 
 	{
-		Usuario usu = null;
+		PersonaNatural personaNatural = null;
 
-		String sql = String.format("SELECT * FROM %1$s.USUARIO WHERE IDUSUARIO = %2$d", USUARIO, id); 
+		String sql = String.format("SELECT * FROM %1$s.PERSONANATURAL WHERE IDPERSONANATURAL = %2$d", USUARIO, id); 
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
 		if(rs.next()) {
-			usu = convertResultSetToUsuario(rs);
+			personaNatural = convertResultSetToPersonaNatural(rs);
 		}
 
-		return usu;
+		return personaNatural;
 	}	
 	
-	public Usuario findUsuarioByUsuario(String pusuario) throws SQLException, Exception 
+	public PersonaNatural findPersonaNaturalByUsuario(String pusuario) throws SQLException, Exception 
 	{
-		Usuario usu = null;
+		PersonaNatural personaNatural = null;
 
-		String sql = String.format("SELECT * FROM %1$s.USUARIO WHERE USUARIO = %2$d", USUARIO, pusuario); 
+		String sql = String.format("SELECT * FROM %1$s.PERSONANATURAL WHERE USUARIO = %2$d", USUARIO, pusuario); 
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
 		if(rs.next()) {
-			usu = convertResultSetToUsuario(rs);
+			personaNatural = convertResultSetToPersonaNatural(rs);
 		}
 
-		return usu;
+		return personaNatural;
 	}	
-//	public void updateUsuario(Usuario usuario) throws SQLException, Exception {
+//	public void updatePersonaNatural(Usuario usuario) throws SQLException, Exception {
 //
 //		StringBuilder sql = new StringBuilder();
 //		sql.append(String.format("UPDATE %s.HABITACION SET ", USUARIO));
@@ -150,9 +153,9 @@ System.out.println(sql);
 //		prepStmt.executeQuery();
 //	}
 
-	public void deleteUsuario(Usuario usuario) throws SQLException, Exception {
+	public void deletePersonaNatural(PersonaNatural personaNatural) throws SQLException, Exception {
 
-		String sql = String.format("DELETE FROM %1$s.USUARIO WHERE IDUSUARIO = %2$d", USUARIO, usuario.getIdUsuario());
+		String sql = String.format("DELETE FROM %1$s.PERSONANATURAL WHERE IDPERSONANATURAL = %2$d", USUARIO, personaNatural.getIdUsuario());
 
 		System.out.println(sql);
 		
@@ -161,19 +164,19 @@ System.out.println(sql);
 		prepStmt.executeQuery();
 	}
 	
-	public Usuario convertResultSetToUsuario(ResultSet resultSet) throws SQLException {
+	public PersonaNatural convertResultSetToPersonaNatural(ResultSet resultSet) throws SQLException {
 		
 		
 		String contrasena = resultSet.getString("CONTRASENA");
 		Long idUsuario = resultSet.getLong("IDUSUARIO");
 		String usuario = resultSet.getString("USUARIO");
-		
+		String nombre = resultSet.getString("NOMBRE");
+		Long uniandino = resultSet.getLong("UNIANDINO");
+
 	
-	
-		Usuario usu = new Usuario(usuario, contrasena, idUsuario);
-		return usu;
+		PersonaNatural personaNatural = new PersonaNatural(usuario, contrasena, idUsuario, nombre,uniandino);
+		return personaNatural;
 	}
-	
 	
 	
 }

@@ -29,7 +29,7 @@ public class PersonaNatural extends Operador {
 		this.nombre = nombre;
 	}
 
-	public long getUniandino() {
+	public Long getUniandino() {
 		return uniandino;
 	}
 
