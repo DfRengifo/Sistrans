@@ -5,6 +5,7 @@ import java.sql.Date;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 public class Contrato {
+    
 	@JsonProperty(value="descripcion")
 	private String descripcion;
 	
@@ -34,14 +35,22 @@ public class Contrato {
 	
 	@JsonProperty(value="idOperador")
 	private Long idOperador;
+        
 	@JsonProperty(value="idVivienda")
 	private Long idVivienda;
-
-	
-	
-	
-	public Contrato(@JsonProperty(value="descripcion")String descripcion,@JsonProperty(value="fechaInicial")java.util.Date fechaInicial,@JsonProperty(value="fechaFinal") java.util.Date fechaFinal,@JsonProperty(value="idContrato") Long idContrato,@JsonProperty(value="noches") Long noches,
-			@JsonProperty(value="costoTotal")Long costoTotal,@JsonProperty(value="idApartamento") Long idApartamento,@JsonProperty(value="idHabitacion") Long idHabitacion, 	@JsonProperty(value="idCliente") Long idCliente,@JsonProperty(value="idOperador") Long idOperador,@JsonProperty(value="idVivienda") Long idVivienda) {
+        
+	public Contrato(@JsonProperty(value="descripcion")String descripcion,
+                @JsonProperty(value="fechaInicial")java.util.Date fechaInicial,
+                @JsonProperty(value="fechaFinal") java.util.Date fechaFinal,
+                @JsonProperty(value="idContrato") Long idContrato,
+                @JsonProperty(value="noches") Long noches,
+		@JsonProperty(value="costoTotal")Long costoTotal,
+                @JsonProperty(value="idApartamento") Long idApartamento,
+                @JsonProperty(value="idHabitacion") Long idHabitacion, 
+                @JsonProperty(value="idCliente") Long idCliente,
+                @JsonProperty(value="idOperador") Long idOperador,
+                @JsonProperty(value="idVivienda") Long idVivienda) 
+        {
 		super();
 		this.descripcion = descripcion;
 		this.fechaInicial = fechaInicial;
@@ -55,8 +64,7 @@ public class Contrato {
 		this.idOperador = idOperador;
 		this.idVivienda = idVivienda;
 	}
-
-
+        
 	public String getDescripcion() {
 		return descripcion;
 	}
@@ -136,18 +144,12 @@ public class Contrato {
 	public void setIdOperador(Long idOperador) {
 		this.idOperador = idOperador;
 	}
-
-
+        
 	public Long getIdVivienda() {
 		return idVivienda;
 	}
-
-
+        
 	public void setIdVivienda(Long idVivienda) {
 		this.idVivienda = idVivienda;
 	}
-	
-	
-	
-	
 }

@@ -8,14 +8,14 @@ public class PersonaNatural extends Operador {
 	private String nombre;
 	
 	@JsonProperty(value="uniandino")
-	private Long uniandino;
-
-	
-	
+	private Long uniandino;	
 	
 	public PersonaNatural(@JsonProperty(value="usuario") String usuario,
-			@JsonProperty(value="contrasena")String contrasena,@JsonProperty(value="idUsuario") Long idUsuario,@JsonProperty(value="nombre")String nombre,
-			@JsonProperty(value="uniandino") Long uniandino) {
+			@JsonProperty(value="contrasena")String contrasena,
+                        @JsonProperty(value="idUsuario") Long idUsuario,
+                        @JsonProperty(value="nombre")String nombre,
+			@JsonProperty(value="uniandino") Long uniandino) 
+        {
 		super(usuario, contrasena, idUsuario);
 		this.nombre = nombre;
 		this.uniandino = uniandino;
@@ -35,9 +35,5 @@ public class PersonaNatural extends Operador {
 
 	public void setUniandino(long uniandino) {
 		this.uniandino = uniandino;
-	}
-	
-	
-	
-	
+	}	
 }
