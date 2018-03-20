@@ -5,13 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import vos.HotelOfrece;
+import vos.HabitacionOfrece;
 
 /**
  * @author Grupo A - 16
  * Dao Servicio Habitacion para conectarse a la base de datos usando JDBC
  */
-public class DAOTablaHotelOfrece {
+public class DAOTablaHabitacionOfrece {
 	
 	public final static String USUARIO = "ISIS2304A241810";
 	
@@ -19,7 +19,7 @@ public class DAOTablaHotelOfrece {
 	
 	private Connection conn;
        
-	public DAOTablaHotelOfrece() {
+	public DAOTablaHabitacionOfrece() {
 		recursos = new ArrayList<Object>();
 	} 
 	
@@ -39,19 +39,19 @@ public class DAOTablaHotelOfrece {
 		this.conn = con;
 	}
 	
-	public void registrarHotelOfrece(HotelOfrece servHab) throws SQLException, Exception {
+	public void registrarHabitacionOfrece(HabitacionOfrece servHab) throws SQLException, Exception {
 
 		if(servHab.getIdServicioHotel() == null || servHab.getIdHotel() == null 
-                        || servHab.getIdHotelOfrece() == null){
+                        || servHab.getIdHabitacionOfrece() == null){
 		  throw new Exception("esta incompleto");
 		}
 		
-		String sql = String.format("INSERT INTO %1$s.HOTELOFRECE (IDHOTELOFRECE, IDHOTEL"
+		String sql = String.format("INSERT INTO %1$s.HABITACIONOFRECE (IDHABITACIONOFRECE, IDHOTEL"
                         + ", IDSERVICIOHOTEL) VALUES (%2$s, '%3$s', '%4$s')", 
 		  USUARIO, 
 		  servHab.getIdHotel(), 
 	          servHab.getIdServicioHotel(),
-		  servHab.getIdHotelOfrece());
+		  servHab.getIdHabitacionOfrece());
                 System.out.println(sql);
 
                 PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -61,11 +61,11 @@ public class DAOTablaHotelOfrece {
 	
 	
 	
-	public ArrayList<HotelOfrece> getServiciosHabitaciones() throws SQLException, Exception {
+	public ArrayList<HabitacionOfrece> getServiciosHabitaciones() throws SQLException, Exception {
             
-		ArrayList<HotelOfrece> servHabs = new ArrayList<HotelOfrece>();
+		ArrayList<HabitacionOfrece> servHabs = new ArrayList<HabitacionOfrece>();
 
-		String sql = String.format("SELECT * FROM %1$s.HOTELOFRECE WHERE ROWNUM <= 50"
+		String sql = String.format("SELECT * FROM %1$s.HABITACIONOFRECE WHERE ROWNUM <= 50"
                         , USUARIO);
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -73,38 +73,38 @@ public class DAOTablaHotelOfrece {
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-		  servHabs.add(convertResultSetToHotelOfrece(rs));
+		  servHabs.add(convertResultSetToHabitacionOfrece(rs));
 		}
 		return servHabs;
 	}
 	
 	
-	public HotelOfrece findHotelOfreceById(Long id) throws SQLException, Exception{
+	public HabitacionOfrece findHabitacionOfreceById(Long id) throws SQLException, Exception{
             
-		HotelOfrece servHab = null;
+		HabitacionOfrece servHab = null;
 
-		String sql = String.format("SELECT * FROM %1$s.HOTELOFRECE WHERE "
-                        + "IDHOTELOFRECE = %2$d", USUARIO, id); 
+		String sql = String.format("SELECT * FROM %1$s.HABITACIONOFRECE WHERE "
+                        + "IDHABITACIONOFRECE = %2$d", USUARIO, id); 
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
 		if(rs.next()) {
-		  servHab = convertResultSetToHotelOfrece(rs);
+		  servHab = convertResultSetToHabitacionOfrece(rs);
 		}
 
 		return servHab;
 	}	
 	
-	/**public void updateHotelOfrece(HotelOfrece servHab) throws SQLException
+	/**public void updateHabitacionOfrece(HabitacionOfrece servHab) throws SQLException
                 , Exception {
 
 		StringBuilder sql = new StringBuilder();
-		sql.append(String.format("UPDATE %s.HOTELOFRECE SET", USUARIO));
+		sql.append(String.format("UPDATE %s.HABITACIONOFRECE SET", USUARIO));
 		sql.append(String.format(" = '%1$s' AND DESCRIPCION = '%2$s' AND "
-                        + "IDHOTELOFRECE = '%3$s'", servHab.getTipo(),
-		servHab.getDescripcion(), servHab.getIdHotelOfrece()));
+                        + "IDHABITACIONOFRECE = '%3$s'", servHab.getTipo(),
+		servHab.getDescripcion(), servHab.getIdHabitacionOfrece()));
 		
 		System.out.println(sql);
 		
@@ -113,11 +113,11 @@ public class DAOTablaHotelOfrece {
 		prepStmt.executeQuery();
 	}*/
 
-	public void deleteHotelOfrece(HotelOfrece servHab) throws SQLException, Exception {
+	public void deleteHabitacionOfrece(HabitacionOfrece servHab) throws SQLException, Exception {
 
-		String sql = String.format("DELETE FROM %1$s.HOTELOFRECE "
-                        + "WHERE IDHOTELOFRECE = %2$d", USUARIO
-                        , servHab.getIdHotelOfrece());
+		String sql = String.format("DELETE FROM %1$s.HABITACIONOFRECE "
+                        + "WHERE IDHABITACIONOFRECE = %2$d", USUARIO
+                        , servHab.getIdHabitacionOfrece());
 
 		System.out.println(sql);
 		
@@ -126,16 +126,17 @@ public class DAOTablaHotelOfrece {
 		prepStmt.executeQuery();
 	}
 	
-	public HotelOfrece convertResultSetToHotelOfrece(ResultSet resultSet) 
+	public HabitacionOfrece convertResultSetToHabitacionOfrece(ResultSet resultSet) 
                 throws SQLException {		
 		
 		Long idServicioHotel = resultSet.getLong("IDSERVICIOHOTEL");
                 Long idHotel = resultSet.getLong("IDHOTEL");
-		Long idHotelOfrece = resultSet.getLong("IDHABITACION");
+		Long idHabitacionOfrece = resultSet.getLong("IDHABITACION");
 	
-		HotelOfrece servHab = new HotelOfrece(idHotelOfrece, idHotel
+		HabitacionOfrece servHab = new HabitacionOfrece(idHabitacionOfrece, idHotel
                         , idServicioHotel);
 		return servHab;
 	}	
 }
+
 
