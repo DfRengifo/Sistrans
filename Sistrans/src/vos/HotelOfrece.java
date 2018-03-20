@@ -13,7 +13,10 @@ public class HotelOfrece {
 	@JsonProperty(value="idServicioHotel")
 	private Long idServicioHotel;	
 	
-	public HotelOfrece(@JsonProperty(value="idHotelOfrece")String idHotelOfrece,@JsonProperty(value="idHotel") String idHotel,@JsonProperty(value="idServicioHotel") Long idServicioHotel) {
+	public HotelOfrece(@JsonProperty(value="idHotelOfrece")String idHotelOfrece,
+                @JsonProperty(value="idHotel") String idHotel,
+                @JsonProperty(value="idServicioHotel") Long idServicioHotel)
+        {
 		super();
 		this.idHotel = idHotel;
 		this.idServicioHotel = idServicioHotel;

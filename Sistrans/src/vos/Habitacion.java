@@ -22,8 +22,13 @@ public class Habitacion {
 	@JsonProperty(value="idOperador")
 	private Long idOperador;
 	
-	public Habitacion(@JsonProperty(value="ubicacion")String ubicacion,@JsonProperty(value="descripcion") String descripcion,@JsonProperty(value="precio") Long precio,
-			@JsonProperty(value="idHabitacion") Long idHabitacion, @JsonProperty(value="tamano") Long tamano,@JsonProperty(value="idOperador") Long idOperador) {
+	public Habitacion(@JsonProperty(value="ubicacion")String ubicacion,
+                @JsonProperty(value="descripcion") String descripcion,
+                @JsonProperty(value="precio") Long precio,
+		@JsonProperty(value="idHabitacion") Long idHabitacion, 
+                @JsonProperty(value="tamano") Long tamano,
+                @JsonProperty(value="idOperador") Long idOperador) 
+        {
 		super();
 		this.ubicacion = ubicacion;
 		this.descripcion = descripcion;
@@ -60,8 +65,7 @@ public class Habitacion {
 	public Long getIdHabitacion() {
 		return idHabitacion;
 	}
-
-
+        
 	public Long getTamano() {
 		return tamano;
 	}
@@ -81,7 +85,4 @@ public class Habitacion {
 	public void setIdHabitacion(Long idHabitacion) {
 		this.idHabitacion = idHabitacion;
 	}
-	
-	
-	
 }

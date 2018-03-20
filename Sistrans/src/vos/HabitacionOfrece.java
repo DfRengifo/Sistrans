@@ -13,7 +13,10 @@ public class HabitacionOfrece {
 	@JsonProperty(value="idServicioHabitacion")
 	private Long idServicioHabitacion;	
 	
-	public HabitacionOfrece(@JsonProperty(value="idHabitacionOfrece")String idHabitacionOfrece,@JsonProperty(value="idHabitacion") String idHabitacion,@JsonProperty(value="idServicioHabitacion") Long idServicioHabitacion) {
+	public HabitacionOfrece(@JsonProperty(value="idHabitacionOfrece")String idHabitacionOfrece,
+                @JsonProperty(value="idHabitacion") String idHabitacion,
+                @JsonProperty(value="idServicioHabitacion") Long idServicioHabitacion) 
+        {
 		super();
 		this.idHabitacion = idHabitacion;
 		this.idServicioHabitacion = idServicioHabitacion;

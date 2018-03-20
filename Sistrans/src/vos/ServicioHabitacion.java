@@ -12,22 +12,15 @@ public class ServicioHabitacion {
 	
 	@JsonProperty(value="idServicioHabitacion")
 	private Long idServicioHabitacion;
-	
-	@JsonProperty(value="idHabitacion")
-	private Long idHabitacion;
-
-	
-	
-	
-	
+        
 	public ServicioHabitacion(@JsonProperty(value="tipo")String tipo,
 			@JsonProperty(value="descripcion")String descripcion,
-			@JsonProperty(value="idServicioHabitacion") Long idServicioHabitacion,@JsonProperty(value="idHabitacion") Long idHabitacion) {
+			@JsonProperty(value="idServicioHabitacion") Long idServicioHabitacion)
+        {
 		super();
 		this.tipo = tipo;
 		this.descripcion = descripcion;
 		this.idServicioHabitacion = idServicioHabitacion;
-		this.idHabitacion = idHabitacion;
 	}
 
 	public String getTipo() {
@@ -53,16 +46,4 @@ public class ServicioHabitacion {
 	public void setIdServicioHabitacion(Long idServicioHabitacion) {
 		this.idServicioHabitacion = idServicioHabitacion;
 	}
-
-	public Long getIdHabitacion() {
-		return idHabitacion;
-	}
-
-	public void setIdHabitacion(Long idHabitacion) {
-		this.idHabitacion = idHabitacion;
-	}
-	
-	
-	
-	
 }

@@ -3,6 +3,7 @@ package vos;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 public class Apartamento {
+    
 	@JsonProperty(value="ubicacion")
 	private String ubicacion;
 	
@@ -21,8 +22,13 @@ public class Apartamento {
 	@JsonProperty(value="idPersonaNatural")
 	private Long idPersonaNatural;
 	
-	public Apartamento(@JsonProperty(value="ubicacion")String ubicacion,@JsonProperty(value="descripcion") String descripcion,@JsonProperty(value="precio") Long precio,
-			@JsonProperty(value="idApartamento") Long idApartamento, @JsonProperty(value="tamano") Long tamano,@JsonProperty(value="idPersonaNatural") Long idPersonaNatural) {
+	public Apartamento(@JsonProperty(value="ubicacion")String ubicacion,
+                @JsonProperty(value="descripcion") String descripcion,
+                @JsonProperty(value="precio") Long precio,
+	        @JsonProperty(value="idApartamento") Long idApartamento, 
+                @JsonProperty(value="tamano") Long tamano,
+                @JsonProperty(value="idPersonaNatural") Long idPersonaNatural)
+        {
 		super();
 		this.ubicacion = ubicacion;
 		this.descripcion = descripcion;
@@ -70,7 +76,4 @@ public class Apartamento {
 	public void setTamano(Long tamano) {
 		this.tamano = tamano;
 	}
-	
-	
-	
 }
