@@ -1,0 +1,383 @@
+{
+	"variables": [],
+	"info": {
+		"name": "EscenarioPruebasIntegridadConFK",
+		"_postman_id": "97f2abb2-77fb-011d-b775-5b0c6eeb7ef1",
+		"description": "Los Escenario de pruebas para las tablas que utilizan Foreign Keys",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Ingreso a una cuenta administrador",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/RotondaDeLosAndes/rest/ingreso",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"identificacion\": 2,\r\n    \"nombre\": \"carlos\",\r\n    \"rol\": \"administrador\",\r\n    \"correo\": \"carlos@gmail.com\"\r\n}"
+				},
+				"description": "Ingreso a una cuenta administrador"
+			},
+			"response": []
+		},
+		{
+			"name": "registro de un representante con una FK existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/RotondaDeLosAndes/rest/registro/representante",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"identificacion\": 20,\r\n    \"nombre\": \"felipe mateo\",\r\n    \"rol\": \"representante\",\r\n    \"correo\": \"fema@gmail.com\",\r\n    \"restauranteid\": 10\r\n}"
+				},
+				"description": "registro de un representante con una FK existente"
+			},
+			"response": []
+		},
+		{
+			"name": "registro de un representante con una FK no existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/RotondaDeLosAndes/rest/registro/representante",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"identificacion\": 2222,\r\n    \"nombre\": \"felipe mateo\",\r\n    \"rol\": \"representante\",\r\n    \"correo\": \"fema@gmail.com\",\r\n    \"restauranteid\": 11\r\n}"
+				},
+				"description": "registro de un representante con una FK no existente"
+			},
+			"response": []
+		},
+		{
+			"name": "Ingreso de un administrador",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/RotondaDeLosAndes/rest/ingreso",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"identificacion\": 2,\r\n    \"nombre\": \"carlos\",\r\n    \"rol\": \"administrador\",\r\n    \"correo\": \"carlos@gmail.com\"\r\n}"
+				},
+				"description": "Ingreso de un administrador"
+			},
+			"response": []
+		},
+		{
+			"name": "Registro de un restaurante con una FK existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/RotondaDeLosAndes/rest/registro/restaurante",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idrestaurante\": 22,\r\n    \"nombre\": \"corral\",\r\n    \"especialidad\": \"hamburguesas\",\r\n    \"paginaweb\": \"elcorral.com\",\r\n    \"idzona\": 100\r\n}"
+				},
+				"description": "Registro de un restaurante con una FK existente"
+			},
+			"response": []
+		},
+		{
+			"name": "Registro de un restaurante con una FK no existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/RotondaDeLosAndes/rest/registro/restaurante",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idrestaurante\": 2222,\r\n    \"nombre\": \"corral\",\r\n    \"especialidad\": \"hamburguesas\",\r\n    \"paginaweb\": \"elcorral.com\",\r\n    \"idzona\": 101\r\n}"
+				},
+				"description": "Registro de un restaurante con una FK no existente"
+			},
+			"response": []
+		},
+		{
+			"name": "Ingreso a una cuenta representante",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/RotondaDeLosAndes/rest/ingreso",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"identificacion\": 20,\r\n    \"nombre\": \"felipe mateo\",\r\n    \"rol\": \"representante\",\r\n    \"correo\": \"fema@gmail.com\"\r\n}"
+				},
+				"description": "Ingreso a una cuenta representante"
+			},
+			"response": []
+		},
+		{
+			"name": "Registro de un menu con un FK existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/RotondaDeLosAndes/rest/registro/menu",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idmenu\": 150,\r\n    \"nombre\": \"pollo con naranja\",\r\n    \"precioproduccion\": 9000,\r\n    \"costoventa\": 25000,\r\n    \"idrestaurante\": 10,\r\n    \"idplatofuerte\": 50,\r\n    \"fechaini\": \"2015-02-03\",\r\n    \"fechafin\": \"2018-02-03\",\r\n    \"cantidad\": 1200\r\n}\r\n"
+				},
+				"description": "Registro de un menu con un FK existente"
+			},
+			"response": []
+		},
+		{
+			"name": "Registro de un menu con un FK no existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/RotondaDeLosAndes/rest/registro/menu",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idmenu\": 2222,\r\n    \"nombre\": \"pollo con naranja\",\r\n    \"precioproduccion\": 9000,\r\n    \"costoventa\": 25000,\r\n    \"idrestaurante\": 11,\r\n    \"idplatofuerte\": 55,\r\n    \"fechaini\": \"2015-02-03\",\r\n    \"fechafin\": \"2018-02-03\",\r\n    \"cantidad\": 1200\r\n}\r\n"
+				},
+				"description": "Registro de un menu con un FK no existente"
+			},
+			"response": []
+		},
+		{
+			"name": "Ingreso a una cuenta cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/RotondaDeLosAndes/rest/ingreso",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"identificacion\": 1,\r\n    \"nombre\": \"david andres\",\r\n    \"rol\": \"cliente\",\r\n    \"correo\": \"david@gmail.com\"\r\n}\r\n"
+				},
+				"description": "Ingreso a una cuenta cliente"
+			},
+			"response": []
+		},
+		{
+			"name": "Ingreso de una venta con un FK existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/RotondaDeLosAndes/rest/registro/venta",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idventa\": 10,\r\n    \"idcliente\": 1,\r\n    \"precio\": 45000,\r\n    \"fecha\": \"2017-07-10\",\r\n    \"hora\": 16,\r\n    \"idplato\": 50,\r\n    \"cantidad\": 1,\r\n    \"idrestaurante\": 10\r\n}"
+				},
+				"description": "Ingreso de una venta con un FK existente"
+			},
+			"response": []
+		},
+		{
+			"name": "Ingreso de una venta con un FK no existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 500\"] = responseCode.code === 500;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/RotondaDeLosAndes/rest/registro/venta",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idventa\": 2222,\r\n    \"idcliente\": 222,\r\n    \"precio\": 45000,\r\n    \"fecha\": \"2017-07-10\",\r\n    \"hora\": 16,\r\n    \"idplato\": 51,\r\n    \"cantidad\": 1,\r\n    \"idrestaurante\": 11\r\n}"
+				},
+				"description": "Ingreso de una venta con un FK no existente"
+			},
+			"response": []
+		}
+	]
+}
